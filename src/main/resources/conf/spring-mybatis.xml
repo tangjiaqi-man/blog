@@ -17,7 +17,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 		<!-- 配置数据源 -->
 		<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="url" value=" jdbc:msq:///blog"/>
+		<property name="url" value="jdbc:mysql:///blog"/>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="username" value="root"/>
 		<property name="password" value="123456"/>
@@ -30,7 +30,7 @@
 		<!-- 配置mybatis接口扫描映射 定义MapperScannerConfigurer -->
 		<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 指定mapper接口 -->
-		<property name="basePackage" value="com.hcjava.do"/>
+		<property name="basePackage" value="com.hcjava.dao"/>
 		</bean>
 </beans>
 
