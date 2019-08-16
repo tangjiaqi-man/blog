@@ -47,4 +47,33 @@ public class UserServiceImpl implements UserService {
 		return noteResult;
 	}
 
+	public NoteResult addUser(String name, String password, String nick) {
+		NoteResult result=new NoteResult();
+		 //检查是否重名
+		  User user = userDao.findByName(name);
+		 if(user!=null) {
+			result.setStatus(1);
+			result.setMsg("用户名已被占用");
+			return result;
+		 }
+		 
+		 try {
+			//执行注册
+			 User user2 = new User();
+			 String uuid = NoteUti.createUUID();//使用工具类生成随机id
+			 user2.setCn_user_id(uuid);//设置用户id
+			 user2.setCn_user_name(name);//设置用户名称
+			 String md5 = NoteUti.md5(password);
+			 user2.setCn_user_password(md5);//设置用户密码
+			 user2.setCn_user_nick(nick);//设置用户密码
+			 userDao.save(user2);
+			result.setStatus(0);
+			result.setMsg("注册成功");
+			 return result;
+		} catch (Exception e) {
+		throw new NoteException("用户注入异常", e);
+		}
+		
+	}
+
 }

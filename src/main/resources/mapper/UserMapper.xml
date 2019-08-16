@@ -5,4 +5,7 @@
 <select id="findByName" resultType="com.hcjava.pojo.User" parameterType="String">
 select cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_nick from cn_user where cn_user_name=#{name}
 </select>
+<insert id="save" parameterType="com.hcjava.pojo.User">
+ insert into cn_user (cn_user_id,cn_user_name,cn_user_password,cn_user_nick )values(#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_nick})
+</insert>
 </mapper>  
