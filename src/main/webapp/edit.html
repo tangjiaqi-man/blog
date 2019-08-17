@@ -289,7 +289,6 @@
 				$('#myEditor').width(width-20);
 			};
 		</script>
-		
         <script type="text/javascript" src="scripts/jquery.min.js"></script>
 		<script type="text/javascript"src="scripts/basevalue.js"></script>
 		<script type="text/javascript" src="scripts/cookie_util.js"></script>
@@ -297,7 +296,13 @@
 		<script type="text/javascript" src="scripts/note.js"></script>
 		<script type="text/javascript" src="scripts/alert.js"></script>
 		<script type="text/javascript">
-		
+		//页面加载完执行的方法
+		$(function() {
+			// 2.执行加载笔记本的方法
+			loadUserBooks();
+			//加载笔记的方法
+			
+		});
 		</script>
 		<!-- Bootstrap框架JS -->
         <script src="scripts/bootstrap.min.js"></script>

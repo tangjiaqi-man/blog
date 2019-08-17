@@ -21,7 +21,7 @@ public class NoteUti {
 	public static String md5(String src) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] digest = md.digest(src.getBytes());
-//将MD5处理结果利用base64转成字符
+		// 将MD5处理结果利用base64转成字符
 		String s = Base64.encodeBase64String(digest);
 		return s;
 	}
