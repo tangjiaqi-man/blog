@@ -5,4 +5,7 @@
 <select id="findByUserId" resultType="com.hcjava.pojo.Book" parameterType="string">
 select cn_notebook_id,cn_user_id,cn_notebook_type_id,cn_notebook_name,cn_notebook_desc,cn_notebook_createtime from cn_notebook where cn_user_id=#{userId}
 </select>
+<insert id="addBook" parameterType="com.hcjava.pojo.Book">
+insert  into  cn_notebook(cn_notebook_id,cn_user_id,cn_notebook_type_id,cn_notebook_name,cn_notebook_desc,cn_notebook_createtime) values(#{cn_notebook_id},#{cn_user_id},'1',#{cn_notebook_name},#{cn_notebook_desc},#{cn_notebook_createtime})
+</insert>
 </mapper>  

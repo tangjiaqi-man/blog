@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hcjava.dao.NoteDao">
+	<select id="findByBookId" resultType="map"
+		parameterType="string">
+		select
+		cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,cn_note_type_id,cn_note_title,cn_note_body,cn_note_create_time,cn_note_last_modify_time
+		from cn_note where cn_notebook_id=#{bookId} and cn_note_status_id='1'
+	</select>
+	<select id="findbyNoteId" resultType="map"
+		parameterType="string">
+		select
+		cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,cn_note_type_id,cn_note_title,cn_note_body,cn_note_create_time,cn_note_last_modify_time
+		from cn_note where cn_note_id=#{noteId}
+	</select>
+	<update id="updateByNoteId" parameterType="string">
+		update cn_note set
+		cn_note_title=#{title},cn_note_body=#{body} where
+		cn_note_id=#{noteId}
+	</update>
+	<!-- 动态跟新语句 -->
+	<update id="dynamicUpate" parameterType="com.hcjava.pojo.Note">
+		update cn_note
+		<set>
+			<if test="cn_note_type_id!=null">
+				cn_note_type_id=#{cn_note_type_id},
+			</if>
+			<if test="cn_note_status_id!=null">
+				cn_note_status_id=#{cn_note_status_id},
+			</if>
+			<if test="cn_note_title!=null">
+				cn_note_title=#{cn_note_title},
+			</if>
+			<if test="cn_note_body!=null">
+				cn_note_body=#{cn_note_body},
+			</if>
+			<if test="cn_note_last_modify_time!=null">
+				cn_note_last_modify_time=#{cn_note_last_modify_time}
+			</if>
+			where cn_note_id=#{cn_note_id}
+		</set>
+	</update>
+	<insert id="addNote" parameterType="com.hcjava.pojo.Note">
+		insert into
+		cn_note(cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,cn_note_type_id,cn_note_title,cn_note_body,cn_note_create_time,cn_note_last_modify_time)
+		values(#{cn_note_id},#{cn_notebook_id},#{cn_user_id},#{cn_note_status_id},#{cn_note_type_id},#{cn_note_title},#{cn_note_body},#{cn_note_create_time},#{cn_note_last_modify_time})
+	</insert>
+</mapper>  

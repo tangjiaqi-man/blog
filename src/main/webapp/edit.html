@@ -300,7 +300,24 @@
 		$(function() {
 			// 2.执行加载笔记本的方法
 			loadUserBooks();
-			//加载笔记的方法
+			//点击笔记li时加载笔记本
+			//$("#book").click(loadNotes)
+			 $("#book_ul").on( "click","li",loadNotes);
+			//给笔记li绑定单击事件
+			 $("#note_ul").on( "click","li",loadNote);
+			// 绑定保存笔记按钮
+			$("#save_note").click(updateNote);
+			//关闭对话框
+			//on绑定的时动态有可能存在也有可能不存在
+			$("#can").on("click",".cancle,.close",closeAlertWindow);
+			//点击笔记本添加按钮时执行弹出创建笔记本的文本框
+			$("#add_notebook").click(alertAddBookWindow)
+			//给文本框中的创建按钮绑定事件 
+			$("#can").on("click","#sure_addbook",addBook);
+			//点击添加按钮弹出创建笔记文本框
+			$("#add_note").click(alertAddNoteWindow);
+			//给文本本框中的创建按钮绑定事件
+			$("#can").on("click","#sure_addnote",addNote);
 			
 		});
 		</script>

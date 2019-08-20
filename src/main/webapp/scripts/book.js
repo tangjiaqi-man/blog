@@ -1,4 +1,4 @@
-
+//副界面
 // 加载用户笔记本列表
 function loadUserBooks() {
 	// 1.获取参数
@@ -55,3 +55,43 @@ function createBookLi(bookName, bookId) {
 	$("#book_ul").append($li);
 	
 }
+//添加笔记本列表
+//1.获取参数userId  bookName
+function addBook(){
+	var userId=getCookie("uid")
+	var name=$("#input_notebook").val().trim();
+	
+	//2.参数格式检查
+	var ok=true
+	if(name==""){
+		ok=false
+		$("#notebook_span").html("笔记本名字为空")
+	}
+	//=与==的区别=是赋值==是测试是否相等
+	if(userId==null){
+		ok=false;
+		window.location.href="log_in.html"
+	}
+	if(ok){
+		//3.发送Ajax
+		$.ajax({
+			url:base_path+"/book/add.do",
+			type:"post",
+			data:{"userId":userId,"bookName":name},
+			dataType:"json",
+			success:function(result){
+			if(result.status==0){
+				var bookId=result.data.cn_contebook_id;
+				var bookName=result.data.cn_notebook_name;
+				createBookLi(bookName, bookId);
+				//提示笔记成功
+				alert(result.msg);
+			}
+			},
+			error:function(){
+				alert("添加笔记本列表异常")
+			}
+		});		
+	}
+}
+

@@ -112,6 +112,7 @@ function registUser() {
 					ok = false;
 					$("#warning_1").show();
 					$("#warning_1 span").html(result.msg)
+					
 				}
 			},
 			error : function() {

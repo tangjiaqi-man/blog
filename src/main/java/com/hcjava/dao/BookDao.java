@@ -6,4 +6,5 @@ import com.hcjava.pojo.Book;
 
 public interface BookDao {
  public List<Book>findByUserId(String userId);
+ public void addBook(Book book);
 }
