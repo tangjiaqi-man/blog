@@ -34,42 +34,69 @@ public class NoteServiceImpl implements NoteService {
 		result.setData(list);
 		return result;
 	}
-	public NoteResult SaveLoginNote(String noteId , String title , String body) {
+
+	public NoteResult SaveLoginNote(String noteId, String title, String body) {
 		NoteResult result = new NoteResult();
-		Note note=new Note();
+		Note note = new Note();
 		note.setCn_note_id(noteId);
 		note.setCn_note_title(title);
 		note.setCn_note_body(body);
 		note.setCn_note_last_modify_time(System.currentTimeMillis());
 		int row = noteDao.dynamicUpate(note);
-		if(row==1) {
-			result.setStatus(0);;
+		if (row == 1) {
+			result.setStatus(0);
+			;
 			result.setMsg("保存完毕");
 			return result;
-		}else {
-			result.setStatus(1);;
+		} else {
+			result.setStatus(1);
+			;
 			result.setMsg("失败");
 			return result;
 		}
 	}
-	public NoteResult addNote(String bookId, String userId,String title) {
+
+	public NoteResult addNote(String bookId, String userId, String title) {
 		NoteResult result = new NoteResult();
 		Note note = new Note();
-		
 		note.setCn_note_body("");
-		
 		note.setCn_note_create_time(System.currentTimeMillis());
-		note.setCn_note_id(new NoteUti().createUUID());
+		note.setCn_note_id(NoteUti.createUUID());
 		note.setCn_note_last_modify_time(System.currentTimeMillis());
-		note.setCn_note_status_id("1");
 		note.setCn_note_title(title);
-		note.setCn_note_type_id("1");
 		note.setCn_notebook_id(bookId);
 		note.setCn_user_id(userId);
 		noteDao.addNote(note);
 		result.setStatus(0);
-		result.setMsg("创建笔记本列表文件完成");
+		result.setMsg("创建笔记成功");
 		result.setData(note);
 		return result;
+	}
+
+	public NoteResult deleteNote(String noteId) {
+		NoteResult result = new NoteResult();
+		noteDao.delet(noteId);
+		result.setStatus(0);
+		result.setMsg("删除成功");
+		return result;
+	}
+
+	public NoteResult updateNote(String noteId, String bookId) {
+		NoteResult result = new NoteResult();
+		Note note = new Note();
+		note.setCn_notebook_id(bookId);
+		note.setCn_note_id(noteId);
+		int i = noteDao.dynamicUpate(note);
+		if(i==1) {
+			result.setStatus(0);
+			result.setMsg("移动成功");
+			result.setData(note);
+			return result;
+		}else {
+			result.setStatus(1);
+			result.setMsg("移动失败");
+			return result;
+		}
+		
 	}
 }

@@ -9,4 +9,6 @@ public interface NoteService {
 
 	public NoteResult SaveLoginNote(String noteId ,String title,String body);
 	public NoteResult addNote(String bookId,String userId,String title);
+	public NoteResult deleteNote(String noteId);
+	public NoteResult updateNote(String noteId,String bookId);
 }

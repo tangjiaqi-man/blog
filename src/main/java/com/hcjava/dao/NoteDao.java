@@ -15,5 +15,6 @@ public interface NoteDao {
 	public void updateByNoteId(@Param("noteId")String noteId , @Param("title")String title ,@Param("body") String body);
 	public int dynamicUpate(Note note);
 	public void addNote(Note note);
+	public void delet(String noteId);
 	
 }

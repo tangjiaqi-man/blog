@@ -26,6 +26,9 @@
 			<if test="cn_note_type_id!=null">
 				cn_note_type_id=#{cn_note_type_id},
 			</if>
+			<if test="cn_notebook_id!=null">
+			 cn_notebook_id=#{cn_notebook_id},
+			</if>
 			<if test="cn_note_status_id!=null">
 				cn_note_status_id=#{cn_note_status_id},
 			</if>
@@ -38,12 +41,15 @@
 			<if test="cn_note_last_modify_time!=null">
 				cn_note_last_modify_time=#{cn_note_last_modify_time}
 			</if>
-			where cn_note_id=#{cn_note_id}
 		</set>
+		where cn_note_id=#{cn_note_id}
 	</update>
 	<insert id="addNote" parameterType="com.hcjava.pojo.Note">
-		insert into
+		insert into 
 		cn_note(cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,cn_note_type_id,cn_note_title,cn_note_body,cn_note_create_time,cn_note_last_modify_time)
-		values(#{cn_note_id},#{cn_notebook_id},#{cn_user_id},#{cn_note_status_id},#{cn_note_type_id},#{cn_note_title},#{cn_note_body},#{cn_note_create_time},#{cn_note_last_modify_time})
+		values(#{cn_note_id},#{cn_notebook_id},#{cn_user_id},'1','1',#{cn_note_title},#{cn_note_body},#{cn_note_create_time},#{cn_note_last_modify_time})
 	</insert>
+	<update id="delet" parameterType="string">
+	  update cn_note set cn_note_status_id='2' where cn_note_id=#{#noteId}
+	</update>
 </mapper>  
